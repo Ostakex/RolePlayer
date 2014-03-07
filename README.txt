@@ -1,1 +1,1 @@
-Lestu mig
+Lestu mig samt plz ekki
