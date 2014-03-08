@@ -21,8 +21,7 @@ function GM:PlayerSpawn( ply )
     ply:SetMaxHealth( 100, true )  
  
     ply:SetWalkSpeed( 190 )  
-    ply:SetRunSpeed ( 235 ) 
-    
+    ply:SetRunSpeed ( 235 )    
  
 end
 
@@ -31,5 +30,6 @@ function GM:PlayerLoadout( ply )
 end
 
 function GM:PlayerInitialSpawn( ply )
-	ply:ConCommand( "showinitspawnmenu" )
+	umsg.Start("rp_newchar", ply);
+	umsg.End();
 end
