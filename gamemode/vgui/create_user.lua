@@ -59,7 +59,7 @@ local function initspawnmenu()
 
 	function SubmitButton:DoClick ( )
 		ruleFrame:Remove();
-		//characterCreation()
+		characterCreation()
 	end
 
 	local SubmitButton = vgui.Create("DButton", ruleFrame);
