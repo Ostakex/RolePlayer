@@ -1,0 +1,20 @@
+"Gamemode"
+{
+	"base"		"base"
+	"title"		"Roleplayer"
+	"maps"		"^rp_"
+	"menusystem"	"1"
+	"workshopid"	"unknown"
+
+	"setting"
+	{
+		1
+		{
+			"name"		""
+			"text"		""
+			"help"		""
+			"type"		"numeric"
+			"default" 	"1"
+		}
+	}
+}
