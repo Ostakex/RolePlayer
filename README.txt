@@ -1,1 +1,0 @@
-Lestu mig samt plz ekki
