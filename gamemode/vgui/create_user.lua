@@ -1,23 +1,50 @@
-/*function showRules()
-	local introForm = vgui.Create( "DFrame" )
-	introForm:Center()
-	introForm:SetSize( 300, 150 ) -- Size form
-	introForm:SetTitle( "Welcome to GModRP" ) -- Form set name
-	introForm:SetVisible( true ) -- Form rendered ( true or false )
-	introForm:SetDraggable( false ) -- Form draggable
-	introForm:ShowCloseButton( false ) -- Show buttons panel
-	introForm:MakePopup()
+local function initspawnmenu()
 
-	local MOTDFrame = vgui.Create( "DFrame" )
-	MOTDFrame:SetTitle( "Message of The day" )
-	MOTDFrame:SetSize( ScrW() - 100, ScrH() - 100 )
-	MOTDFrame:Center()
-	MOTDFrame:SetBackgroundBlur( true )
-	MOTDFrame:MakePopup()
-	 
-	local MOTDHTMLFrame = vgui.Create( "HTML", MOTDFrame )
-	MOTDHTMLFrame:SetPos( 25, 50 )
-	MOTDHTMLFrame:SetSize( MOTDFrame:GetWide() - 50, MOTDFrame:GetTall() - 150 )
-	MOTDHTMLFrame:OpenURL( "wiki.garrysmod.com" )
+	local W, H = ScrW() * .75, ScrH() * .85;
+
+	local ruleFrame = vgui.Create( "DFrame" )
+	ruleFrame:SetTitle( "Rules" )
+	ruleFrame:SetSize( W, H)
+	ruleFrame:Center()
+	ruleFrame:SetBackgroundBlur( true )
+	ruleFrame:MakePopup()
+	ruleFrame:ShowCloseButton( false )
+	ruleFrame:SetDraggable(false)
+
+	local htmlRules = vgui.Create( "HTML", ruleFrame )
+	htmlRules:SetPos( 25, 50 )
+	htmlRules:SetSize( ruleFrame:GetWide() - 50, ruleFrame:GetTall() - 100 )
+	htmlRules:OpenURL( "http://perpheads.com/rules" )
+
+	local SubmitButton = vgui.Create("DButton", ruleFrame)
+	SubmitButton:SetPos(5, H - 25)
+	SubmitButton:SetSize(W * .5 - 7.5, 20)
+	SubmitButton:SetText("I Agree ( 10 Seconds )")
+	SubmitButton:SetDisabled(true)
+	
+	timer.Simple(1, function ( ) SubmitButton:SetText("I Agree ( 9 Seconds )") end)
+	timer.Simple(2, function ( ) SubmitButton:SetText("I Agree ( 8 Seconds )") end)
+	timer.Simple(3, function ( ) SubmitButton:SetText("I Agree ( 7 Seconds )") end)
+	timer.Simple(4, function ( ) SubmitButton:SetText("I Agree ( 6 Seconds )") end)
+	timer.Simple(5, function ( ) SubmitButton:SetText("I Agree ( 5 Seconds )") end)
+	timer.Simple(6, function ( ) SubmitButton:SetText("I Agree ( 4 Seconds )") end)
+	timer.Simple(7, function ( ) SubmitButton:SetText("I Agree ( 3 Seconds )") end)
+	timer.Simple(8, function ( ) SubmitButton:SetText("I Agree ( 2 Seconds )") end)
+	timer.Simple(9, function ( ) SubmitButton:SetText("I Agree ( 1 Seconds )") end)
+	timer.Simple(10, function ( ) SubmitButton:SetText("I Agree") SubmitButton:SetDisabled(false) end)
+
+	function SubmitButton:DoClick ( )
+			ruleFrame:Remove();
+	end
+
+	local SubmitButton = vgui.Create("DButton", ruleFrame);
+	SubmitButton:SetPos(10 + (W * .5 - 7.5), H - 25);
+	SubmitButton:SetSize(W * .5 - 7.5, 20);
+	SubmitButton:SetText("I Disagree");
+	
+	function SubmitButton:DoClick ( )
+		RunConsoleCommand('disconnect');
+	end
+
 end
-hook.Add( "PlayerInitialSpawn", "PlayerInitialSpawn", showRules )*/
+concommand.Add( "showinitspawnmenu", initspawnmenu )

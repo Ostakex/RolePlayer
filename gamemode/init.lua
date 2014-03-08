@@ -1,11 +1,18 @@
-AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "shared.lua" )
-AddCSLuaFile( "vgui/create_user.lua" )
- 
+//Add Net Messages
+
+
+// Include the shared init file.
 include( "shared.lua" )
+
+// Include the server files.
 include("sv_config.lua")
 include( "libs/sv_database.lua" )
-include( "vgui/create_user.lua" )
+
+// Add client lua resources.
+AddCSLuaFile( "cl_init.lua" )
+AddCSLuaFile( "vgui/create_user.lua" )
+
+AddCSLuaFile( "shared.lua" )
 
 function GM:PlayerSpawn( ply )
     self.BaseClass:PlayerSpawn( ply )   
@@ -15,6 +22,7 @@ function GM:PlayerSpawn( ply )
  
     ply:SetWalkSpeed( 190 )  
     ply:SetRunSpeed ( 235 ) 
+    
  
 end
 
@@ -23,5 +31,5 @@ function GM:PlayerLoadout( ply )
 end
 
 function GM:PlayerInitialSpawn( ply )
-	   ply:PrintMessage( HUD_PRINTTALK, "Welcome, " .. ply:Name() .. "!" )
+	ply:ConCommand( "showinitspawnmenu" )
 end
