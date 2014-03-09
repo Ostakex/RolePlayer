@@ -1,7 +1,17 @@
 
 local function characterCreation()
 
-	local x, y = ScrW() * .5, ScrH() * .5;
+	/*
+	local models={} 
+	local i = 1
+	for k, v in pairs(file.Find("models/player/group01/*.mdl","GAME")) do 
+		table.insert(Models,i,v)
+		i = i + 1
+	end
+	Msg("yolo")
+	print(models[1])*/
+
+	local x, y = ScrW() * .3, ScrH() * .5;
 	local createFrame = vgui.Create("DFrame")
 	createFrame:SetTitle("Create your character")
 	createFrame:SetSize( x, y)
@@ -11,14 +21,30 @@ local function characterCreation()
 	createFrame:ShowCloseButton( false )
 	createFrame:SetDraggable(false)
 
-	local icon = vgui.Create("DModelPanel", createFrame)
-	icon:SetSize(x * 0.5, y * 0.5)
-	icon:SetPos(x * 0.55, y * 0.1)
-	icon:SetFOV()
-	icon:SetLookAt( Vector( 0,0,35 ) )
-	icon:SetModel( LocalPlayer():GetModel() )	
-	function icon:LayoutEntity( ent )
+	local modelPanel = vgui.Create("DModelPanel", createFrame)
+	modelPanel:SetSize(x * 0.5, y * 0.5)
+	modelPanel:SetPos(x * 0.25, y * 0.1)
+	modelPanel:SetFOV(45)
+	modelPanel:SetLookAt( Vector( 0,0,50 ) )
+	modelPanel:SetModel( LocalPlayer():GetModel() )	
+	function modelPanel:LayoutEntity( ent )
 		ent:SetAngles( Angle( 0, 45, 0 ) );
+	end
+
+	local SubmitButton = vgui.Create("DButton", createFrame)
+	SubmitButton:SetPos(x * 0.60, y * 0.65 )
+	SubmitButton:SetSize(x * 0.15, 20)
+	SubmitButton:SetText(">")
+	function SubmitButton:DoClick ( )
+		modelPanel:SetModel("models/player/group01/male_02.mdl")
+	end
+
+	local SubmitButton = vgui.Create("DButton", createFrame)
+	SubmitButton:SetPos(x * 0.25, y * 0.65 )
+	SubmitButton:SetSize(x * 0.15, 20)
+	SubmitButton:SetText("<")
+	function SubmitButton:DoClick ( )
+		modelPanel:SetModel( LocalPlayer():GetModel() )	
 	end
 
 	local textboxFirst = vgui.Create("DTextEntry", createFrame)
@@ -32,13 +58,13 @@ local function characterCreation()
 	textboxLast:SetText("Last Name")
 
 	local SubmitButton = vgui.Create("DButton", createFrame)
-	SubmitButton:SetPos(x * 0.25, y * 0.95 )
 	SubmitButton:SetSize(x * .5, 20)
+	SubmitButton:SetPos(x * 0.25, y * 0.95 )
 	SubmitButton:SetText("Create")
 	SubmitButton:SetDisabled(false)
 
 	function SubmitButton:DoClick ( )
-		createFrame:Remove();
+			createFrame:Close()
 	end
 
 	concommand.Add( "remove",function( )
