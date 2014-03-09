@@ -22,13 +22,16 @@ local function characterCreation()
 
 	local x, y = ScrW() * .3, ScrH() * .5;
 	local createFrame = vgui.Create("DFrame")
-	createFrame:SetTitle("Create your character")
+	createFrame:SetTitle("")
 	createFrame:SetSize( x, y)
 	createFrame:Center()
 	createFrame:MakePopup()
 	createFrame:SetBackgroundBlur( true )
 	createFrame:ShowCloseButton( false )
 	createFrame:SetDraggable(false)
+	createFrame.Paint = function()
+		draw.RoundedBox( 8, 0, 0, createFrame:GetWide(), createFrame:GetTall(), Color( 255, 255, 255, 180 ) )
+	end
 
 	local modelPanel = vgui.Create("DModelPanel", createFrame)
 	modelPanel:SetSize(x * 0.5, y * 0.5)
@@ -110,6 +113,9 @@ local function initspawnmenu()
 	ruleFrame:MakePopup()
 	ruleFrame:ShowCloseButton( false )
 	ruleFrame:SetDraggable(false)
+	ruleFrame.Paint = function()
+	draw.RoundedBox( 8, 0, 0, ruleFrame:GetWide(), ruleFrame:GetTall(), Color( 255, 255, 255, 180 ) )
+	end
 
 	local htmlRules = vgui.Create( "HTML", ruleFrame )
 	htmlRules:SetPos( 25, 50 )

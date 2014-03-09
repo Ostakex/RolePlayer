@@ -31,8 +31,7 @@ end
 function getPlayerStats( ply )
     local queryStats = db:query("SELECT model, first, last, money FROM players WHERE steamID = '" .. ply:SteamID() .. "'")
     function queryStats:onSuccess(data)
-        PrintTable(data[1][1])
-        ply:SetModel(data[1])
+        ply:SetModel(data[1].model)
     end
     queryStats.onError = function(q,e) print("something went wrong when checking" .. e) end
     queryStats:start()
@@ -48,6 +47,7 @@ function FirstJoinMysql( ply )
             umsg.End();
         else
             print(ply:SteamID().." already exsists")
+            getPlayerStats( ply )
         end
     end
     queryCheck.onError = function(q,e) print("something went wrong when checking" .. e) end

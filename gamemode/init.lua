@@ -15,18 +15,19 @@ AddCSLuaFile( "shared.lua" )
 for k, v in pairs(file.Find("roleplayer/gamemode/shared/*.lua","LUA")) do AddCSLuaFile("shared/" .. v); end
 for k, v in pairs(file.Find("roleplayer/gamemode/vgui/*.lua","LUA")) do AddCSLuaFile("vgui/" .. v); end
 
-
+local firstSpawn = true
 function GM:PlayerSpawn( ply )
+	if firstSpawn == false then
+		getPlayerStats( ply )  
+	end
     self.BaseClass:PlayerSpawn( ply )   
  
     ply:SetGravity  ( 1 )  
     ply:SetMaxHealth( 100, true )  
  
-    ply:SetWalkSpeed( 190 )  
-    ply:SetRunSpeed ( 235 )  
+    ply:SetWalkSpeed( 100 )  
+    ply:SetRunSpeed ( 235 )
     ply:SetGamemodeTeam(0)  
-
-    getPlayerStats( ply )
 
     local oldhands = ply:GetHands()
 	if ( IsValid( oldhands ) ) then oldhands:Remove() end
@@ -56,11 +57,8 @@ function GM:PlayerSpawn( ply )
 	end
 end
 
-function GM:PlayerLoadout( ply )
-	
-end
-
 function GM:PlayerInitialSpawn( ply )
+	firstSpawn = false
 end
 
 
