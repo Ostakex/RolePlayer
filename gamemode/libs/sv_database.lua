@@ -37,6 +37,10 @@ function FirstJoinMysql( ply )
     local query1 = db:query("SELECT * FROM players WHERE steamID = '" .. ply:SteamID() .. "'")
     query1.onSuccess = function(q)
         if not checkQuery(q) then
+        umsg.Start("rp_newchar", ply);
+        umsg.End();
+        end
+        /*    
 	    local query2 = db:query("INSERT INTO players(steamID, nick, first, last, money) VALUES ('".. ply:SteamID() .."','".. ply:Nick() .."','"..first.."','"..last.."',"..money..")")		// else create the bugger
 	    query2.onSuccess = function(q)  print(ply:SteamID().." first time joining created in database") end
 	    query2.onError = function(q,e) print("something went wrong" .. e) end
@@ -44,6 +48,7 @@ function FirstJoinMysql( ply )
         else
             print(ply:SteamID().." already exsists")
         end
+        */
     end
     query1.onError = function(q,e) print("something went wrong when checking") end
     query1:start()

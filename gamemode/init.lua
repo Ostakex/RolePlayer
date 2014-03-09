@@ -6,13 +6,13 @@ include( "shared.lua" )
 
 // Include the server files.
 include("sv_config.lua")
-include("player.lua")
+include("libs/sv_teamswitch.lua")
 include("libs/sv_database.lua")
 
 // Add client lua resources.
 AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "vgui/create_user.lua" )
-AddCSLuaFile( "vgui/cl_hud.lua" )
+
+for k, v in pairs(file.Find("roleplayer/gamemode/vgui/*.lua","LUA")) do AddCSLuaFile("vgui/" .. v); end
 
 AddCSLuaFile( "shared.lua" )
 
@@ -32,6 +32,4 @@ function GM:PlayerLoadout( ply )
 end
 
 function GM:PlayerInitialSpawn( ply )
-	umsg.Start("rp_newchar", ply);
-	umsg.End();
 end
