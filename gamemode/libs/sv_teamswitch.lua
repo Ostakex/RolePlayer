@@ -2,7 +2,7 @@ local ply = FindMetaTable("Player")
 
 local teams = {}
 
-teams[0] = {name = "citizen", color = Vector( 0, 1, 0 ), weapons = {"weapon_pistol"} }
+teams[0] = {name = "citizen", color = Vector( 0, 1, 0 ), weapons = {"rp_fists"} }
 teams[1] = {name = "Police", color = Vector( 0, 0, 1.0 ), weapons = {"weapon_crowbar", "weapon_pistol"} }
 teams[2] = {name = "Mayor", color = Vector( 1, 0, 0 ), weapons = {"weapon_pistol"} }
 

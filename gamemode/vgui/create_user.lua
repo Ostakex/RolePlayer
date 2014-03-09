@@ -1,15 +1,24 @@
-
 local function characterCreation()
 
-	/*
-	local models={} 
-	local i = 1
-	for k, v in pairs(file.Find("models/player/group01/*.mdl","GAME")) do 
-		table.insert(Models,i,v)
-		i = i + 1
-	end
-	Msg("yolo")
-	print(models[1])*/
+	local currentModel = 1
+	local models={
+	"models/player/group01/male_01.mdl",
+	"models/player/group01/male_02.mdl",
+	"models/player/group01/male_03.mdl",
+	"models/player/group01/male_04.mdl",
+	"models/player/group01/male_05.mdl",
+	"models/player/group01/male_06.mdl",
+	"models/player/group01/male_07.mdl",
+	"models/player/group01/male_08.mdl",
+	"models/player/group01/male_09.mdl",
+	"models/player/group01/female_01.mdl",
+	"models/player/group01/female_02.mdl",
+	"models/player/group01/female_03.mdl",
+	"models/player/group01/female_04.mdl",
+	"models/player/group01/female_05.mdl",
+	"models/player/group01/female_06.mdl"
+	} 
+
 
 	local x, y = ScrW() * .3, ScrH() * .5;
 	local createFrame = vgui.Create("DFrame")
@@ -26,7 +35,7 @@ local function characterCreation()
 	modelPanel:SetPos(x * 0.25, y * 0.1)
 	modelPanel:SetFOV(45)
 	modelPanel:SetLookAt( Vector( 0,0,50 ) )
-	modelPanel:SetModel( LocalPlayer():GetModel() )	
+	modelPanel:SetModel( models[currentModel] )	
 	function modelPanel:LayoutEntity( ent )
 		ent:SetAngles( Angle( 0, 45, 0 ) );
 	end
@@ -36,7 +45,12 @@ local function characterCreation()
 	SubmitButton:SetSize(x * 0.15, 20)
 	SubmitButton:SetText(">")
 	function SubmitButton:DoClick ( )
-		modelPanel:SetModel("models/player/group01/male_02.mdl")
+		if currentModel == table.Count(models) then 
+			currentModel = 1
+		else 
+			currentModel = currentModel + 1
+		end		
+		modelPanel:SetModel(models[currentModel])	
 	end
 
 	local SubmitButton = vgui.Create("DButton", createFrame)
@@ -44,7 +58,12 @@ local function characterCreation()
 	SubmitButton:SetSize(x * 0.15, 20)
 	SubmitButton:SetText("<")
 	function SubmitButton:DoClick ( )
-		modelPanel:SetModel( LocalPlayer():GetModel() )	
+		if currentModel == 1 then 
+			currentModel = table.Count(models)
+		else 
+			currentModel = currentModel - 1
+		end		
+		modelPanel:SetModel(models[currentModel])	
 	end
 
 	local textboxFirst = vgui.Create("DTextEntry", createFrame)
@@ -64,7 +83,11 @@ local function characterCreation()
 	SubmitButton:SetDisabled(false)
 
 	function SubmitButton:DoClick ( )
-			createFrame:Close()
+		local selectedModel = models[currentModel]
+		local selectedFirstName = textboxFirst:GetValue()
+		local selectedLastName = textboxLast:GetValue()
+		createFrame:Close()
+		RunConsoleCommand("rp_register", selectedModel, selectedFirstName, selectedLastName)
 	end
 
 	concommand.Add( "remove",function( )

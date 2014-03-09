@@ -11,10 +11,10 @@ include("libs/sv_database.lua")
 
 // Add client lua resources.
 AddCSLuaFile( "cl_init.lua" )
-
+AddCSLuaFile( "shared.lua" )
+for k, v in pairs(file.Find("roleplayer/gamemode/shared/*.lua","LUA")) do AddCSLuaFile("shared/" .. v); end
 for k, v in pairs(file.Find("roleplayer/gamemode/vgui/*.lua","LUA")) do AddCSLuaFile("vgui/" .. v); end
 
-AddCSLuaFile( "shared.lua" )
 
 function GM:PlayerSpawn( ply )
     self.BaseClass:PlayerSpawn( ply )   
@@ -25,6 +25,8 @@ function GM:PlayerSpawn( ply )
     ply:SetWalkSpeed( 190 )  
     ply:SetRunSpeed ( 235 )  
     ply:SetGamemodeTeam(0)  
+
+    getPlayerStats( ply )
 
     local oldhands = ply:GetHands()
 	if ( IsValid( oldhands ) ) then oldhands:Remove() end
@@ -52,7 +54,6 @@ function GM:PlayerSpawn( ply )
 
 		hands:Spawn()
 	end
-   	SCORE:HandleSpawn(ply)
 end
 
 function GM:PlayerLoadout( ply )
@@ -61,3 +62,12 @@ end
 
 function GM:PlayerInitialSpawn( ply )
 end
+
+
+hook.Add( "PlayerNoClip", "FeelFreeToTurnItOff", function( ply, desiredState )
+	if ( desiredState == false ) then -- the player wants to turn noclip off
+		return true -- always allow
+	elseif ( ply:IsAdmin() ) then
+		return true -- allow administrators to enter noclip
+	end
+end )

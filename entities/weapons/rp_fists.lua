@@ -4,7 +4,7 @@ AddCSLuaFile()
 SWEP.PrintName			= "Fists"
 
 SWEP.Author			= ""
-SWEP.Purpose		= ""
+SWEP.Purpose		= "Punch people till they die"
 
 SWEP.Spawnable			= true
 SWEP.UseHands			= true

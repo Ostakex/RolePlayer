@@ -20,9 +20,3 @@ GM.dbPort = 3306
 
 --The money you get when you first spawn
 GM.defaultStartMoney = 25000
-
---The default first name you are given when you first join
-GM.defaultFirst = "John"
-
---The default last name you are given when you first join
-GM.defaultLast = "Doe"
