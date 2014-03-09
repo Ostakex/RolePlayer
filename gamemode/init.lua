@@ -12,6 +12,7 @@ include("libs/sv_database.lua")
 // Add client lua resources.
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "vgui/create_user.lua" )
+AddCSLuaFile( "vgui/cl_hud.lua" )
 
 AddCSLuaFile( "shared.lua" )
 
