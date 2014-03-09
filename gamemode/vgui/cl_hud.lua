@@ -1,5 +1,5 @@
 local function HideHUD( name )
-	if(name == "CHudHealth") or (name == "CHudBattery") then
+	if(name == "CHudHealth") or (name == "CHudBattery") or (name == "CHudAmmo") then
         return false
     end
 end
